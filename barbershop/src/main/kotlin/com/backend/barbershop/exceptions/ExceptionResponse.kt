@@ -1,4 +1,4 @@
-package com.backend.Auth.exceptions
+package com.backend.barbershop.exceptions
 
 import java.util.Date
 

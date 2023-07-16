@@ -8,9 +8,9 @@ spring:
     name: barbershop
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/barbershop_db #${DB_URL}
-    username: postgres #${DB_USER}
-    password: Genji2023 #${DB_PASS}
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASS}
   jpa:
     hibernate:
       ddl-auto: update

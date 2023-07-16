@@ -1,8 +1,7 @@
 package com.backend.barbershop.exceptions.handler
 
-import com.backend.Auth.exceptions.ExceptionResponse
-import com.backend.Auth.exceptions.ResourceNotFoundException
-// libs
+import com.backend.barbershop.exceptions.ExceptionResponse
+import com.backend.barbershop.exceptions.ResourceNotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice

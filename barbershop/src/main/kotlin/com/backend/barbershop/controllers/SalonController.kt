@@ -1,5 +1,6 @@
 package com.backend.barbershop.controllers
 
+import com.backend.barbershop.exceptions.ResponseException
 import com.backend.barbershop.models.Salon
 import com.backend.barbershop.services.SalonService
 import org.slf4j.Logger
@@ -16,9 +17,9 @@ class SalonController(
   fun getSalons(): List<Salon> {
     try {
       return salonService.getSalons()
-    } catch (e: Exception) {
+    } catch (e: ResponseException) {
       logger.info("error -> $e")
-      throw Exception("Error getting salons")
+      throw e
     }
   }
 
@@ -26,17 +27,17 @@ class SalonController(
   fun getSalon(@PathVariable id: Long): Salon {
     try {
       return salonService.getSalon(id)
-    } catch (e: Exception) {
-      throw Exception("Error getting salon")
+    } catch (e: ResponseException) {
+      throw e
     }
   }
 
   @PostMapping
-  fun addSalon(@RequestParam salon: Salon): Salon {
+  fun addSalon(@RequestBody salon: Salon): Salon {
     try {
       return salonService.addSalon(salon)
-    } catch (e: Exception) {
-      throw Exception("Error adding salon")
+    } catch (e: ResponseException) {
+      throw e
     }
   }
 
@@ -44,17 +45,17 @@ class SalonController(
   fun deleteSalon(@RequestParam id: Long) {
     try {
       salonService.deleteSalon(id)
-    } catch (e: Exception) {
-      throw Exception("Error deleting salon")
+    } catch (e: ResponseException) {
+      throw e
     }
   }
 
   @PutMapping
-  fun updateSalon(@RequestParam id: Long, @RequestParam salon: Salon): Salon {
+  fun updateSalon(@RequestBody id: Long, @RequestBody salon: Salon): Salon {
     try {
       return salonService.updateSalon(id, salon)
-    } catch (e: Exception) {
-      throw Exception("Error updating salon")
+    } catch (e: ResponseException) {
+      throw e
     }
   }
 }
