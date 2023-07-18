@@ -3,7 +3,6 @@ package com.backend.barbershop.services
 import com.backend.barbershop.models.Salon
 import com.backend.barbershop.repositories.SalonRepository
 import org.springframework.stereotype.Service
-// use sl4j for logging
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
