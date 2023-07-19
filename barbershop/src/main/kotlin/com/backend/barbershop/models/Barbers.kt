@@ -11,21 +11,21 @@ data class Barbers(
   @Id @GeneratedValue(strategy = GenerationType.AUTO)
   val id: Long = 0,
 
-  @NotNull(message = "Name is required")
+  @NotNull(message = "Barber name is required")
   @Column(nullable = false)
-  val name: String = "",
+  var name: String = "",
 
-  @NotNull(message = "Address is required")
+  @NotNull(message = "Barber address is required")
   @Column(nullable = false)
-  val address: String = "",
+  var address: String = "",
 
   @ElementCollection
   @CollectionTable(name = "barber_services", joinColumns = [JoinColumn(name = "barber_id")])
   @Column(name = "service")
-  val services: List<String> = listOf(),
+  var services: List<String> = listOf(),
 
   @Column(nullable = false)
-  val is_available: Boolean = false,
+  var is_available: Boolean = false,
 
   @JsonManagedReference
   @OneToMany(mappedBy = "barber", cascade = [CascadeType.ALL])

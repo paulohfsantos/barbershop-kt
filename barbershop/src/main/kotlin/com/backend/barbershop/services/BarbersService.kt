@@ -47,13 +47,20 @@ class BarbersService(
 
   fun updateBarber(id: Long, barber: Barbers): Barbers {
     logger.info("update barber -> $id, $barber")
-    return barberRepository.save(
-      Barbers(
-        id = id,
-        name = barber.name,
-        salon = barber.salon,
-        reservations = barber.reservations,
+    val barberData = barberRepository.findById(id).orElseThrow {
+      ResponseException(
+        message = "Barber does not exist",
+        status = HttpStatus.NOT_FOUND
       )
-    )
+    }
+
+    barberData.name = barber.name
+    barberData.address = barber.address
+    barberData.services = barber.services
+    barberData.is_available = barber.is_available
+    barberData.reservations = barber.reservations
+    barberData.salon = barber.salon
+
+    return barberRepository.save(barberData)
   }
 }

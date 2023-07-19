@@ -52,4 +52,16 @@ class BarbersController(
       throw e
     }
   }
+
+  @PutMapping("/{id}")
+  fun updateBarber(
+    @PathVariable id: Long,
+    @RequestBody barber: Barbers
+  ): Barbers {
+    try {
+      return barbersService.updateBarber(id, barber)
+    } catch (e: ResponseException) {
+      throw e
+    }
+  }
 }
