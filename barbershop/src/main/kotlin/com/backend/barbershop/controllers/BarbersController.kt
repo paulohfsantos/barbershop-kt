@@ -34,11 +34,21 @@ class BarbersController(
   }
 
   @PostMapping
-  fun addBarber(@RequestBody barber: Barbers, salon: Salon): Barbers {
+  fun addBarber(@RequestBody barber: Barbers): Barbers {
     try {
-      return barbersService.addBarber(barber, salon)
+      logger.info("try -> $barber")
+      return barbersService.addBarber(barber)
     } catch (e: ResponseException) {
       logger.info("error -> $e")
+      throw e
+    }
+  }
+
+  @DeleteMapping("/{id}")
+  fun deleteBarber(@PathVariable id: Long) {
+    try {
+      barbersService.deleteBarber(id)
+    } catch (e: ResponseException) {
       throw e
     }
   }

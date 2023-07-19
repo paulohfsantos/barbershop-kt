@@ -26,17 +26,34 @@ class BarbersService(
     return barberRepository.findById(id).get()
   }
 
-  fun addBarber(barber: Barbers, salon: Salon): Barbers {
-    val salonData = salonRepository.findById(salon.id).orElseThrow {
-      logger.info("salon ${salon.id}")
-      ResponseException(
-        message = "Salon does not exist",
-        status = HttpStatus.NOT_FOUND
-      )
+  fun addBarber(barber: Barbers): Barbers {
+    val salonData = barber.salon?.let {
+      salonRepository.findById(it.id).orElseThrow {
+        ResponseException(
+          message = "Salon does not exist",
+          status = HttpStatus.NOT_FOUND
+        )
+      }
     }
-
     barber.salon = salonData
 
     return barberRepository.save(barber)
+  }
+
+  fun deleteBarber(id: Long) {
+    logger.info("delete barber -> $id")
+    return barberRepository.deleteById(id)
+  }
+
+  fun updateBarber(id: Long, barber: Barbers): Barbers {
+    logger.info("update barber -> $id, $barber")
+    return barberRepository.save(
+      Barbers(
+        id = id,
+        name = barber.name,
+        salon = barber.salon,
+        reservations = barber.reservations,
+      )
+    )
   }
 }

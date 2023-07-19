@@ -21,5 +21,6 @@ data class Salon(
 
   @JsonManagedReference
   @OneToMany
+  @JoinColumn(name = "salon_id")
   var barbers: List<Barbers> = mutableListOf(),
 )
