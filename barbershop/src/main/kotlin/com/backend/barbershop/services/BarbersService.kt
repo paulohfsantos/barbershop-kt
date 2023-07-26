@@ -45,6 +45,8 @@ class BarbersService(
     return barberRepository.deleteById(id)
   }
 
+  // TODO: create or refactor update barber to be deactivated instead of deleted
+
   fun updateBarber(id: Long, barber: Barbers): Barbers {
     logger.info("update barber -> $id, $barber")
     val barberData = barberRepository.findById(id).orElseThrow {

@@ -2,7 +2,7 @@ package com.backend.barbershop.controllers
 
 import com.backend.barbershop.exceptions.ResponseException
 import com.backend.barbershop.models.Barbers
-import com.backend.barbershop.models.Salon
+import com.backend.barbershop.dto.ResponseDTO
 import com.backend.barbershop.services.BarbersService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -34,10 +34,12 @@ class BarbersController(
   }
 
   @PostMapping
-  fun addBarber(@RequestBody barber: Barbers): Barbers {
+  fun addBarber(@RequestBody barber: Barbers): ResponseDTO {
     try {
       logger.info("try -> $barber")
-      return barbersService.addBarber(barber)
+      barbersService.addBarber(barber).let {
+        return ResponseDTO(message = "Barber added successfully")
+      }
     } catch (e: ResponseException) {
       logger.info("error -> $e")
       throw e
@@ -45,21 +47,21 @@ class BarbersController(
   }
 
   @DeleteMapping("/{id}")
-  fun deleteBarber(@PathVariable id: Long) {
+  fun deleteBarber(@PathVariable id: Long): ResponseDTO {
     try {
-      barbersService.deleteBarber(id)
+      barbersService.deleteBarber(id).let {
+        return ResponseDTO(message = "Barber deleted successfully")
+      }
     } catch (e: ResponseException) {
       throw e
     }
   }
 
   @PutMapping("/{id}")
-  fun updateBarber(
-    @PathVariable id: Long,
-    @RequestBody barber: Barbers
-  ): Barbers {
+  fun updateBarber(@PathVariable id: Long, @RequestBody barber: Barbers): ResponseDTO {
     try {
-      return barbersService.updateBarber(id, barber)
+      barbersService.updateBarber(id, barber)
+      return ResponseDTO(message = "Barber updated successfully")
     } catch (e: ResponseException) {
       throw e
     }
