@@ -1,5 +1,8 @@
 package com.backend.barbershop.services
 
+import com.backend.barbershop.dto.LoginDTO
+import com.backend.barbershop.dto.RegisterDTO
+import com.backend.barbershop.exceptions.UserException
 import com.backend.barbershop.models.User
 import com.backend.barbershop.repositories.UserRepository
 import org.slf4j.Logger
@@ -17,9 +20,24 @@ class UserService {
   @Autowired
   private lateinit var passwordEncoder: PasswordEncoder
 
-  fun createUser(user: User) {
-    user.password = passwordEncoder.encode(user.password)
-    userRepository.save(user)
-    logger.info("User ${user.username} created")
+  fun getUserByEmail(email: String): User {
+    return userRepository.findByEmail(email).orElseThrow {
+      logger.error("Email not found")
+      throw UserException("Email not found")
+    }
+  }
+
+  fun getProfile(id: Long): User {
+    return userRepository.findById(id).orElseThrow {
+      logger.error("User not found")
+      throw UserException("User not found")
+    }
+  }
+
+  fun getUserById(id: Long): User {
+    return userRepository.findById(id).orElseThrow {
+      logger.error("User not found")
+      throw UserException("User not found")
+    }
   }
 }

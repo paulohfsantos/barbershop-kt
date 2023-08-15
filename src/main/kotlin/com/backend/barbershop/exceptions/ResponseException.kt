@@ -7,7 +7,7 @@ open class ResponseException(
     private val status: HttpStatus,
     override val message: String
 ):RuntimeException(message) {
-    fun handleException(): Any {
+    fun handleException(): ResponseEntity<Any> {
         return ResponseEntity.status(this.status).body(
             ErrorResponse(
                 message = this.message,
