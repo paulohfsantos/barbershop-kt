@@ -1,8 +1,10 @@
 package com.backend.barbershop.config
 
+import com.backend.barbershop.exceptions.ResponseException
 import io.jsonwebtoken.Jwts
 import org.slf4j.LoggerFactory
 import org.springframework.core.env.get
+import org.springframework.http.HttpStatus
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource
@@ -19,13 +21,15 @@ class JWTConfig: OncePerRequestFilter() {
 
     if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
       val token = authorizationHeader.substring(7)
-      val claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).body
-      val username = claims.subject
 
-      if (username != null && SecurityContextHolder.getContext().authentication == null) {
+      try {
+        val username = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).body.subject
+
         val authentication = UsernamePasswordAuthenticationToken(username, null, emptyList())
         authentication.details = WebAuthenticationDetailsSource().buildDetails(request)
         SecurityContextHolder.getContext().authentication = authentication
+      } catch (e: ResponseException) {
+        throw e
       }
     }
 
