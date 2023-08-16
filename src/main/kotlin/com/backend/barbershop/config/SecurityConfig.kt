@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.CorsConfigurationSource
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
@@ -19,10 +20,11 @@ class SecurityConfig {
   @Throws(Exception::class)
   fun filterChain(http: HttpSecurity): SecurityFilterChain {
     return http
+      .addFilterBefore(JWTConfig(), UsernamePasswordAuthenticationFilter::class.java)
       .cors().and()
       .csrf().disable()
       .authorizeRequests()
-      .antMatchers("/api/public").permitAll()
+      .antMatchers("/api/public/**").permitAll()
       .anyRequest().authenticated()
       .and()
       .formLogin()
@@ -42,12 +44,5 @@ class SecurityConfig {
     val src = UrlBasedCorsConfigurationSource()
     src.registerCorsConfiguration("/**", config)
     return src
-  }
-
-  @Bean
-  fun webSecurityCustomizer(): WebSecurityCustomizer {
-    return WebSecurityCustomizer { web: WebSecurity ->
-      web.ignoring().antMatchers("/api/public/**")
-    }
   }
 }

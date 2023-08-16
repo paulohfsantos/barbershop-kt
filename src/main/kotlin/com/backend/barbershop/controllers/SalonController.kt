@@ -18,7 +18,6 @@ class SalonController(
     try {
       return salonService.getSalons()
     } catch (e: ResponseException) {
-      logger.info("error -> $e")
       throw e
     }
   }
