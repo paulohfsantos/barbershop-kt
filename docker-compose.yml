@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:latest
+    #command: postgres -c 'config_file=/etc/postgresql/postgresql.conf'
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DATABASE}
+    ports:
+      - "5432:5432"
+  barbershop-backend:
+    image: barbershop-backend:latest
+    build:
+      context: ./barbershop
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: ${DB_HOST}
+      DATABASE: ${DATABASE}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+networks:
+  barbershop-network:
+    driver: bridge
