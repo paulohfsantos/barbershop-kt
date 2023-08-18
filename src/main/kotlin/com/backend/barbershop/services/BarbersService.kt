@@ -1,6 +1,7 @@
 package com.backend.barbershop.services
 
 import com.backend.barbershop.exceptions.ResponseException
+import com.backend.barbershop.models.Salon
 import com.backend.barbershop.models.Barbers
 import org.springframework.stereotype.Service
 import com.backend.barbershop.repositories.BarberRepository
