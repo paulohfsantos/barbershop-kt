@@ -37,6 +37,8 @@ dependencies {
 	implementation("org.springdoc:springdoc-openapi-ui:1.6.3")
 	implementation("io.jsonwebtoken:jjwt:0.9.1")
 	implementation("org.springframework.boot:spring-boot-starter-security")
+	// h2 database
+	implementation("com.h2database:h2")
 	compileOnly("org.projectlombok:lombok")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.postgresql:postgresql")
