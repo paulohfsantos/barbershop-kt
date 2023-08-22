@@ -21,10 +21,10 @@ data class Salon(
   @JsonManagedReference
   @OneToMany
   @JoinColumn(name = "salon_id")
-  var reservations: List<Reservation> = mutableListOf(),
+  var reservations: List<Reservation> ?= mutableListOf(),
 
   @JsonManagedReference
   @OneToMany
   @JoinColumn(name = "salon_id")
-  var barbers: List<Barbers> = mutableListOf(),
+  var barbers: List<Barbers> ?= mutableListOf(),
 )
