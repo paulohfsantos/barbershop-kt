@@ -6,11 +6,15 @@ spring:
       matching-strategy: ANT_PATH_MATCHER
   config:
     name: barbershop
+    jwt:
+      secret: secret
+      expiration: 86400000
   datasource:
+    #url: jdbc:postgresql://db:5432/postgres?currentSchema=barbershop_db
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=barbershop_db
+    username: ""
+    password: ""
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${DB_HOST}/${DATABASE}
-    username: ${DB_USER}
-    password: ${DB_PASS}
   jpa:
     hibernate:
       ddl-auto: update
