@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api/barbers")
 class BarbersController(
-  val logger: Logger = LoggerFactory.getLogger(BarbersController::class.java),
+  // val logger: Logger = LoggerFactory.getLogger(BarbersController::class.java),
   val barbersService: BarbersService
 ) {
   @GetMapping
@@ -19,7 +19,6 @@ class BarbersController(
     try {
       return barbersService.getBarbers()
     } catch (e: ResponseException) {
-      logger.info("error -> $e")
       throw e
     }
   }
@@ -36,12 +35,10 @@ class BarbersController(
   @PostMapping
   fun addBarber(@RequestBody barber: Barbers): ResponseDTO {
     try {
-      logger.info("try -> $barber")
       barbersService.addBarber(barber).let {
         return ResponseDTO(message = "Barber added successfully")
       }
     } catch (e: ResponseException) {
-      logger.info("error -> $e")
       throw e
     }
   }
