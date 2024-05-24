@@ -39,6 +39,7 @@ class AuthService {
       id = userFound.id,
       username = userFound.username,
       email = userFound.email,
+      avatar = userFound.avatar ?: ""
     )
 
     return LoginResponseDTO(token, userResponse)
