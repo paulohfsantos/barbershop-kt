@@ -8,10 +8,10 @@ services:
     networks:
         - barbershop-network
     environment:
-      POSTGRES_USER: ""
-      POSTGRES_PASSWORD: ""
-      POSTGRES_DB: ""
-      SECRET_KEY: ""
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgresAdmin!
+      POSTGRES_DB: postgres
+      SECRET_KEY: segredin
     ports:
       - "5432:5432"
     volumes:

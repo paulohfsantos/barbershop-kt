@@ -1,6 +1,7 @@
 package com.backend.barbershop.models
 
 import com.backend.barbershop.dto.UserResponseDTO
+import com.backend.barbershop.services.AvatarService
 import com.fasterxml.jackson.annotation.JsonIgnore
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import javax.persistence.*
@@ -24,7 +25,10 @@ data class User (
 
   @NotNull(message = "Email is required")
   @Column(name = "email", unique = true, nullable = false)
-  var email: String = ""
+  var email: String = "",
+
+  @Column(name = "avatar")
+  var avatar: String? = AvatarService.DEFAULT_AVATAR
 ) {
   fun encodePassword() {
     val encoder = BCryptPasswordEncoder()
@@ -32,10 +36,6 @@ data class User (
   }
 
   fun convertToDTO(): UserResponseDTO {
-    return UserResponseDTO(
-      id = this.id,
-      username = this.username,
-      email = this.email
-    )
+    return UserResponseDTO(this, this.avatar!!)
   }
 }
