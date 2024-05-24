@@ -11,8 +11,9 @@ data class Reservation(
   val id: Long = 0,
 
   @ManyToOne
-  @JoinColumn(name = "salon_id")
-  val salon: Salon? = null,
+  @JoinColumn(name = "salon_id", nullable = false)
+  @JsonBackReference("salon-reservations")
+  val salon: Salon,
 
   @Column(nullable = false)
   val customer: String = "",
@@ -20,8 +21,8 @@ data class Reservation(
   @Column(nullable = false)
   val time: LocalDateTime = LocalDateTime.now(),
 
-  @JsonBackReference
   @ManyToOne
   @JoinColumn(name = "barber_id")
+  @JsonBackReference("barber-reservations")
   val barber: Barbers? = null,
 )

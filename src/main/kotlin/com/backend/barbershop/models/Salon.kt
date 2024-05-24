@@ -19,12 +19,10 @@ data class Salon(
   val location: String = "",
 
   @JsonManagedReference
-  @OneToMany
-  @JoinColumn(name = "salon_id")
+  @OneToMany(mappedBy = "salon", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
   var reservations: List<Reservation> ?= mutableListOf(),
 
   @JsonManagedReference
-  @OneToMany
-  @JoinColumn(name = "salon_id")
+  @OneToMany(mappedBy = "salon", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
   var barbers: List<Barbers> ?= mutableListOf(),
 )
