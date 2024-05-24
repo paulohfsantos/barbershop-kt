@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "com.backend"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.7-SNAPSHOT"
 
 java {
 	sourceCompatibility = JavaVersion.VERSION_11
@@ -37,6 +37,9 @@ dependencies {
 	implementation("org.springdoc:springdoc-openapi-ui:1.6.3")
 	implementation("io.jsonwebtoken:jjwt:0.9.1")
 	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("com.amazonaws:aws-java-sdk-bom:1.12.0")
+	implementation("com.amazonaws:aws-java-sdk-s3:1.12.0")
+	implementation("javax.xml.bind:jaxb-api:2.3.1")
 	implementation("com.h2database:h2")
 	implementation("org.postgresql:postgresql")
 	compileOnly("org.projectlombok:lombok")
