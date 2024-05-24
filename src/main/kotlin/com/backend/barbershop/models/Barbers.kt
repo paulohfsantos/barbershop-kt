@@ -22,7 +22,7 @@ data class Barbers(
   @ElementCollection
   @CollectionTable(name = "barber_services", joinColumns = [JoinColumn(name = "barber_id")])
   @Column(name = "service")
-  var services: List<String> = listOf(),
+  var services: List<String> = emptyList(),
 
   @Column(nullable = false)
   var is_available: Boolean = false,
@@ -31,7 +31,7 @@ data class Barbers(
   @OneToMany(mappedBy = "barber", cascade = [CascadeType.ALL])
   var reservations: List<Reservation> = listOf(),
 
-   @JsonBackReference
+  @JsonBackReference
    @ManyToOne
    @JoinColumn(name = "salon_id")
   var salon: Salon? = null,

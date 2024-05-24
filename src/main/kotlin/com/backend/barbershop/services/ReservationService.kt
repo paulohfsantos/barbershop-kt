@@ -40,14 +40,17 @@ class ReservationService {
     salonId: Long,
     customer: String,
     time: LocalDateTime,
+    barberId: Long
   ): Reservation {
     logger.info("reservation list -> $salonId, $customer")
     val salon = salonRepository.findById(salonId).get()
+    val barber = barberRepository.findById(barberId).get()
 
     return reservationRepository.save(Reservation(
       salon = salon,
       customer = customer,
       time = time,
+      barber = barber
     ))
   }
 

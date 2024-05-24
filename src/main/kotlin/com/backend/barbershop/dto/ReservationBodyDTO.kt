@@ -6,4 +6,5 @@ class ReservationBodyDTO {
   var salonId: Long = 0
   var customer: String = ""
   var time: LocalDateTime = LocalDateTime.now()
+  var barberId: Long = 0
 }
