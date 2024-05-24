@@ -1,5 +1,6 @@
 package com.backend.barbershop.controllers
 
+import com.backend.barbershop.dto.ReservationBodyDTO
 import com.backend.barbershop.models.Reservation
 import com.backend.barbershop.services.ReservationService
 import org.springframework.web.bind.annotation.*
@@ -27,9 +28,13 @@ class ReservationController(private val reservationService: ReservationService) 
   }
 
   @PostMapping
-  fun addReservation(@RequestParam salonId: Long, @RequestParam customer: String, time: LocalDateTime): Reservation {
+  fun addReservation(@RequestBody reservation: ReservationBodyDTO): Reservation {
     try {
-      return reservationService.addReservation(salonId, customer, time)
+      return reservationService.addReservation(
+        reservation.salonId,
+        reservation.customer,
+        reservation.time
+      )
     } catch (e: Exception) {
       throw Exception("Error adding reservation")
     }

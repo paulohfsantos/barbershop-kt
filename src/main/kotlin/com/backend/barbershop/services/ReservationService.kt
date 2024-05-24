@@ -3,18 +3,26 @@ package com.backend.barbershop.services
 import com.backend.barbershop.models.Reservation
 import com.backend.barbershop.repositories.BarberRepository
 import com.backend.barbershop.repositories.ReservationRepository
-import org.springframework.stereotype.Service
-// import sl4j for logging
+import com.backend.barbershop.repositories.SalonRepository
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
 @Service
-class ReservationService(
-  private val logger: Logger = LoggerFactory.getLogger(ReservationService::class.java),
-  private val barberRepository: BarberRepository,
-  private val reservationRepository: ReservationRepository
-) {
+class ReservationService {
+  @Autowired
+  private lateinit var barberRepository: BarberRepository
+
+  @Autowired
+  private lateinit var reservationRepository: ReservationRepository
+
+  private val logger: Logger = LoggerFactory.getLogger(ReservationService::class.java)
+
+  @Autowired
+  private lateinit var salonRepository: SalonRepository
+
   fun getReservations(salonId: Long): List<Reservation> {
     logger.info("reservation list -> $salonId")
     return reservationRepository.findAll()
@@ -28,18 +36,19 @@ class ReservationService(
     return reservationRepository.findById(id).get()
   }
 
-  fun addReservation(salonId: Long, customer: String, time: LocalDateTime): Reservation {
+  fun addReservation(
+    salonId: Long,
+    customer: String,
+    time: LocalDateTime,
+  ): Reservation {
     logger.info("reservation list -> $salonId, $customer")
-    val salon = reservationRepository.findById(salonId).get()
-    // val isBarberAvailable = barberRepository.findAll()
+    val salon = salonRepository.findById(salonId).get()
 
-    return reservationRepository.save(
-      Reservation(
-        salon = salon.salon,
-        customer = customer,
-        time = time,
-      )
-    )
+    return reservationRepository.save(Reservation(
+      salon = salon,
+      customer = customer,
+      time = time,
+    ))
   }
 
   fun deleteReservation(salonId: Long, reservationId: Long) {
