@@ -27,7 +27,7 @@ Service for barber shop app
 - Run the project with IntelliJ IDEA: ```Run -> Run 'BarberShopApplication'```
 
 ## Swagger UI
-- http://localhost:8080/swagger-ui.html
+- http://localhost:5000/swagger-ui.html
 
 ## Author
 [Paulo Henrique Ferreira Santos](https://linkedin.com/in/paulohfsantos/)
