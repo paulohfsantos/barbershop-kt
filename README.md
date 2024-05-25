@@ -23,7 +23,7 @@ Service for barber shop app
     - set up your postgresql database ```user``` and ```password```
     - Download dependencies
 
-- Run the project with graddle: ```gradle bootRun```
+- Run the project with gradle: ```gradle bootRun```
 - Run the project with IntelliJ IDEA: ```Run -> Run 'BarberShopApplication'```
 
 ## Swagger UI
