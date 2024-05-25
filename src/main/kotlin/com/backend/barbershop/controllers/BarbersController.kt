@@ -1,19 +1,19 @@
 package com.backend.barbershop.controllers
 
+import com.backend.barbershop.dto.AddBarberDTO
 import com.backend.barbershop.exceptions.ResponseException
 import com.backend.barbershop.models.Barbers
 import com.backend.barbershop.dto.ResponseDTO
 import com.backend.barbershop.services.BarbersService
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/barbers")
-class BarbersController(
-  // val logger: Logger = LoggerFactory.getLogger(BarbersController::class.java),
-  val barbersService: BarbersService
-) {
+class BarbersController {
+  @Autowired
+  private lateinit var barbersService: BarbersService
+
   @GetMapping
   fun getBarbers(): List<Barbers> {
     try {
@@ -33,11 +33,9 @@ class BarbersController(
   }
 
   @PostMapping
-  fun addBarber(@RequestBody barber: Barbers): ResponseDTO {
+  fun addBarber(@RequestBody barber: AddBarberDTO): Barbers {
     try {
-      barbersService.addBarber(barber).let {
-        return ResponseDTO(message = "Barber added successfully")
-      }
+      return barbersService.addBarber(barber)
     } catch (e: ResponseException) {
       throw e
     }

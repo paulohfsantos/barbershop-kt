@@ -30,4 +30,4 @@ Service for barber shop app
 - http://localhost:8080/swagger-ui.html
 
 ## Author
-[Paulo Santos](https://linkedin.com/in/paulohfsantos/)
+[Paulo Henrique Ferreira Santos](https://linkedin.com/in/paulohfsantos/)

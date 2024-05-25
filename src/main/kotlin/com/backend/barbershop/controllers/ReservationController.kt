@@ -33,7 +33,8 @@ class ReservationController(private val reservationService: ReservationService) 
       return reservationService.addReservation(
         reservation.salonId,
         reservation.customer,
-        reservation.time
+        reservation.time,
+        reservation.barberId
       )
     } catch (e: Exception) {
       throw Exception("Error adding reservation")
