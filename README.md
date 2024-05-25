@@ -31,3 +31,6 @@ Service for barber shop app
 
 ## Author
 [Paulo Henrique Ferreira Santos](https://linkedin.com/in/paulohfsantos/)
+
+## yt video
+[here](https://youtu.be/8HAWlm_2o48)
